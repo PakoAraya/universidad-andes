@@ -9,16 +9,16 @@ public class AlumnoDTO {
   private String rut;
   private String nombre;
   private String direccion;
-  private List<MateriaDTO> materiaDTO;
+  private List<MateriaDTO> materias;
 
   public AlumnoDTO() {}
 
-  public AlumnoDTO(Long id, String rut, String nombre, String direccion, List<MateriaDTO> materiaDTO) {
+  public AlumnoDTO(Long id, String rut, String nombre, String direccion, List<MateriaDTO> materias) {
     this.id = id;
     this.rut = rut;
     this.nombre = nombre;
     this.direccion = direccion;
-    this.materiaDTO = materiaDTO;
+    this.materias = materias;
   }
 
   // Constructor que recibe una entidad Alumno y la convierte a DTO usando lambda
@@ -27,9 +27,9 @@ public class AlumnoDTO {
     this.rut = alumno.getRut();
     this.nombre = alumno.getNombre();
     this.direccion = alumno.getDireccion();
-    this.materiaDTO = alumno.getMateria().stream()
-                            .map(materia -> new MateriaDTO(materia))  // Función lambda
-                            .collect(Collectors.toList());  // Convertir Stream a List
+    this.materias = alumno.getMateria().stream()
+            .map(materia -> new MateriaDTO(materia))  // Función lambda
+            .collect(Collectors.toList());  // Convertir Stream a List
   }
 
   public Long getId() {
@@ -64,11 +64,13 @@ public class AlumnoDTO {
     this.direccion = direccion;
   }
 
-  public List<MateriaDTO> getMateriaDTO() {
-    return materiaDTO;
+  // Cambiado de getMateriaDTO a getMaterias
+  public List<MateriaDTO> getMaterias() {
+    return materias;
   }
 
-  public void setMateriaDTO(List<MateriaDTO> materiaDTO) {
-    this.materiaDTO = materiaDTO;
+  // Cambiado de setMateriaDTO a setMaterias
+  public void setMaterias(List<MateriaDTO> materias) {
+    this.materias = materias;
   }
 }
