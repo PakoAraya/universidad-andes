@@ -1,28 +1,27 @@
 package com.uandes.andesapp.dtos;
 
-import com.uandes.andesapp.models.Alumno;
 import com.uandes.andesapp.models.Materia;
-import org.springframework.stereotype.Component;
 
-@Component
 public class MateriaDTO {
   private Long id;
   private String nombre;
-  private Alumno alumno;
+  private AlumnoDTO alumnoDTO;
 
   public MateriaDTO() {}
 
-  public MateriaDTO(Long id, String nombre, Alumno alumno) {
+  public MateriaDTO(Long id, String nombre, AlumnoDTO alumnoDTO) {
     this.id = id;
     this.nombre = nombre;
-    this.alumno = alumno;
+    this.alumnoDTO = alumnoDTO;
   }
 
+  // Constructor que recibe una entidad Materia y la convierte a DTO
   public MateriaDTO(Materia materia) {
     this.id = materia.getId();
     this.nombre = materia.getNombre();
-    this.alumno = materia.getAlumno();
+    this.alumnoDTO = new AlumnoDTO(materia.getAlumno());  // Convertimos Alumno a AlumnoDTO
   }
+
 
   public Long getId() {
     return id;
@@ -40,11 +39,11 @@ public class MateriaDTO {
     this.nombre = nombre;
   }
 
-  public Alumno getAlumno() {
-    return alumno;
+  public AlumnoDTO getAlumnoDTO() {
+    return alumnoDTO;
   }
 
-  public void setAlumno(Alumno alumno) {
-    this.alumno = alumno;
+  public void setAlumnoDTO(AlumnoDTO alumnoDTO) {
+    this.alumnoDTO = alumnoDTO;
   }
 }

@@ -23,17 +23,17 @@ public class Alumno {
   private String direccion;
 
   @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<Materia> materias;
+  private List<Materia> materia;
 
   public Alumno() {
   }
 
-  public Alumno(Long id, String rut, String nombre, String direccion, List<Materia> materias) {
+  public Alumno(Long id, String rut, String nombre, String direccion, List<Materia> materia) {
     this.id = id;
     this.rut = rut;
     this.nombre = nombre;
     this.direccion = direccion;
-    this.materias = materias;
+    this.materia = materia;
   }
 
   public Long getId() {
@@ -68,11 +68,11 @@ public class Alumno {
     this.direccion = direccion;
   }
 
-  public List<Materia> getMaterias() {
-    return materias;
+  public List<Materia> getMateria() {
+    return materia;
   }
 
-  public void setMaterias(List<Materia> materias) {
-    this.materias = materias;
+  public void setMateria(List<Materia> materia) {
+    this.materia = materia;
   }
 }

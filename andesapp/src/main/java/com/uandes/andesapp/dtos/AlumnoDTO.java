@@ -1,36 +1,35 @@
 package com.uandes.andesapp.dtos;
 
 import com.uandes.andesapp.models.Alumno;
-import com.uandes.andesapp.models.Materia;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Component
 public class AlumnoDTO {
-
   private Long id;
   private String rut;
   private String nombre;
   private String direccion;
-  private List<Materia> materias;
+  private List<MateriaDTO> materiaDTO;
 
   public AlumnoDTO() {}
 
-  public AlumnoDTO(Long id, String rut, String nombre, String direccion, List<Materia> materias) {
+  public AlumnoDTO(Long id, String rut, String nombre, String direccion, List<MateriaDTO> materiaDTO) {
     this.id = id;
     this.rut = rut;
     this.nombre = nombre;
     this.direccion = direccion;
-    this.materias = materias;
+    this.materiaDTO = materiaDTO;
   }
 
+  // Constructor que recibe una entidad Alumno y la convierte a DTO usando lambda
   public AlumnoDTO(Alumno alumno) {
     this.id = alumno.getId();
     this.rut = alumno.getRut();
     this.nombre = alumno.getNombre();
     this.direccion = alumno.getDireccion();
-    this.materias = alumno.getMaterias();
+    this.materiaDTO = alumno.getMateria().stream()
+                            .map(materia -> new MateriaDTO(materia))  // Función lambda
+                            .collect(Collectors.toList());  // Convertir Stream a List
   }
 
   public Long getId() {
@@ -65,11 +64,11 @@ public class AlumnoDTO {
     this.direccion = direccion;
   }
 
-  public List<Materia> getMaterias() {
-    return materias;
+  public List<MateriaDTO> getMateriaDTO() {
+    return materiaDTO;
   }
 
-  public void setMaterias(List<Materia> materias) {
-    this.materias = materias;
+  public void setMateriaDTO(List<MateriaDTO> materiaDTO) {
+    this.materiaDTO = materiaDTO;
   }
 }
