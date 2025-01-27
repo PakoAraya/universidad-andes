@@ -27,7 +27,7 @@ public class AlumnoDTO {
     this.rut = alumno.getRut();
     this.nombre = alumno.getNombre();
     this.direccion = alumno.getDireccion();
-    this.materias = alumno.getMateria().stream()
+    this.materias = alumno.getMaterias().stream()
             .map(materia -> new MateriaDTO(materia))  // Función lambda
             .collect(Collectors.toList());  // Convertir Stream a List
   }

@@ -9,6 +9,7 @@ import com.uandes.andesapp.repositories.MateriaRepositoryJPA;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +25,12 @@ public class AlumnoServiceImp implements IAlumnoService {
 
   @Override
   public AlumnoDTO save(AlumnoDTO alumnoDTO) {
+    // Validar si el RUT ya existe
+    Optional<Alumno> alumnoExistente = alumnoRepositoryJPA.findByRut(alumnoDTO.getRut());
+    if (alumnoExistente.isPresent()) {
+      throw new RuntimeException("El RUT " + alumnoDTO.getRut() + " ya está registrado.");
+    }
+
     Alumno alumno = new Alumno();
     alumno.setRut(alumnoDTO.getRut());
     alumno.setNombre(alumnoDTO.getNombre());
@@ -39,7 +46,7 @@ public class AlumnoServiceImp implements IAlumnoService {
             })
             .collect(Collectors.toList());
 
-    alumno.setMateria(materias);  // Asignar las materias al alumno
+    alumno.setMaterias(materias);  // Asignar las materias al alumno
 
     Alumno alumnoGuardado = alumnoRepositoryJPA.save(alumno);
     return new AlumnoDTO(alumnoGuardado);
@@ -84,7 +91,7 @@ public class AlumnoServiceImp implements IAlumnoService {
             })
             .collect(Collectors.toList());
 
-    alumno.setMateria(materias);  // Asignar las materias actualizadas al alumno
+    alumno.setMaterias(materias);  // Asignar las materias actualizadas al alumno
 
     Alumno alumnoActualizado = alumnoRepositoryJPA.save(alumno);
     return new AlumnoDTO(alumnoActualizado);

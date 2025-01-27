@@ -19,21 +19,21 @@ public class Alumno {
   @NotNull(message = "El campo nombre no puede ser nulo")
   private String nombre;
 
-  @Column(name = "direccion", nullable = false)
+  @Column(name = "direccion", nullable = true)
   private String direccion;
 
   @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private List<Materia> materia;
+  private List<Materia> materias;
 
   public Alumno() {
   }
 
-  public Alumno(Long id, String rut, String nombre, String direccion, List<Materia> materia) {
+  public Alumno(Long id, String rut, String nombre, String direccion, List<Materia> materias) {
     this.id = id;
     this.rut = rut;
     this.nombre = nombre;
     this.direccion = direccion;
-    this.materia = materia;
+    this.materias = materias;
   }
 
   public Long getId() {
@@ -68,11 +68,11 @@ public class Alumno {
     this.direccion = direccion;
   }
 
-  public List<Materia> getMateria() {
-    return materia;
+  public List<Materia> getMaterias() {
+    return materias;
   }
 
-  public void setMateria(List<Materia> materia) {
-    this.materia = materia;
+  public void setMaterias(List<Materia> materias) {
+    this.materias = materias;
   }
 }
