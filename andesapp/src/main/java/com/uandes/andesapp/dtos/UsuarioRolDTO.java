@@ -9,13 +9,20 @@ public class UsuarioRolDTO {
 
   public UsuarioRolDTO() {}
 
+  //Constructor que recibe los IDs de Usuario y Rol
+  //necesarios para crear una nueva instancia de UsuarioRolDTO y UsuarioServiceImp
+  public UsuarioRolDTO(Long id, Long usuarioId, Long rolId) {
+    this.id = id;
+    this.usuarioId = usuarioId;
+    this.rolId = rolId;
+  }
+
   public UsuarioRolDTO(UsuarioRol usuarioRol) {
     this.id = usuarioRol.getId();
     this.usuarioId = usuarioRol.getUsuario().getId();
     this.rolId = usuarioRol.getRol().getId();
   }
 
-  // Getters y Setters
   public Long getId() {
     return id;
   }

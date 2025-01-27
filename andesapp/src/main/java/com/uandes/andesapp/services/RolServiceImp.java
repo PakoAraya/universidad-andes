@@ -64,4 +64,10 @@ public class RolServiceImp implements IRolService {
     }
     return null;
   }
+
+  @Override
+  public Rol findByNombre(String nombre) {
+    // Buscar un rol por su nombre
+    return rolRepositoryJPA.findByNombre(nombre).orElse(null);
+  }
 }
